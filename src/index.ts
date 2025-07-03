@@ -8,10 +8,14 @@ import authRoutes from './routes/auth';
 import expenseRoutes from './routes/expenses'; // Corrected import
 import './models'; // This one line is enough to load all models and associations
 
-const app = express();
-const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+const corsOptions = {
+  origin: 'http://localhost:5173' // This explicitly allows your frontend to connect
+};
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // Mount the routes
