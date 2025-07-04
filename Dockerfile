@@ -14,7 +14,7 @@ COPY --from=build /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/dist ./dist
 
 # Expose the port your app runs on
-EXPOSE 3001
+EXPOSE 8080
 
 # The command to run the application
 CMD [ "node", "dist/index.js" ]

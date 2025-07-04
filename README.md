@@ -44,7 +44,7 @@ tsconfig.json             # TypeScript config
 
 1. **Clone the repository:**
    ```sh
-   git clone <repo-url>
+   git clone https://github.com/jainamga/expReport-Backend
    cd expense-tracker-backend
    ```
 
