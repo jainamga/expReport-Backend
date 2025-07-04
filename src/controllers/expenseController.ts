@@ -26,8 +26,24 @@ export const createExpense = async (req: AuthRequest, res: Response) => {
 // --- Get expenses ---
 export const getExpenses = async (req: AuthRequest, res: Response) => {
   try {
-    const whereClause =
+    const whereClause: any =
       req.user?.role === 'Admin' ? {} : { user_id: req.user?.id };
+
+    // Add filters based on query params
+    const { category_id, start_date, end_date } = req.query;
+
+    if (category_id) {
+      whereClause.category_id = category_id;
+    }
+    if (start_date || end_date) {
+      whereClause.expense_date = {};
+      if (start_date) {
+        whereClause.expense_date['$gte'] = start_date;
+      }
+      if (end_date) {
+        whereClause.expense_date['$lte'] = end_date;
+      }
+    }
 
     const expenses = await Expense.findAll({ where: whereClause });
     res.json(expenses);
